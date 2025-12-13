@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AURORA MD - Advanced WhatsApp Session ID Generator by Mr Afrix Tech">
+  <title>AURORA MD | Session Generator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy-primary: #0a1628;
+      --navy-secondary: #0f1d32;
+      --navy-tertiary: #152238;
+      --accent-aurora: #00d4ff;
+      --accent-aurora-glow: rgba(0, 212, 255, 0.3);
+      --accent-purple: #a855f7;
+      --accent-pink: #ec4899;
+      --accent-whatsapp: #25D366;
+      --accent-youtube: #FF0000;
+      --text-primary: #f0f6ff;
+      --text-secondary: #94a3b8;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="light"] {
+      --navy-primary: #f8fafc;
+      --navy-secondary: #e2e8f0;
+      --navy-tertiary: #cbd5e1;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent-aurora-glow: rgba(0, 212, 255, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--navy-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: var(--transition);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(236, 72, 153, 0.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-aurora);
+      background: var(--navy-secondary);
+      color: var(--accent-aurora);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: var(--transition);
+      z-index: 1000;
+      box-shadow: 0 4px 15px var(--accent-aurora-glow);
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1) rotate(15deg);
+      box-shadow: 0 6px 25px var(--accent-aurora-glow);
+    }
+
+    .container {
+      max-width: 480px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-container {
+      margin-bottom: 30px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .aurora-logo {
+      width: 160px;
+      height: 160px;
+      filter: drop-shadow(0 0 20px var(--accent-aurora-glow));
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--accent-aurora) 0%, var(--accent-purple) 50%, var(--accent-pink) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
+    }
+
+    .tagline {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      text-align: center;
+      max-width: 380px;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .buttons-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 18px 28px;
+      background: var(--navy-secondary);
+      border-radius: 16px;
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border-color: var(--accent-aurora);
+    }
+
+    .btn i {
+      font-size: 1.3rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-aurora) 0%, #0891b2 100%);
+      border: none;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 10px 35px rgba(0, 212, 255, 0.35);
+    }
+
+    .btn-youtube {
+      background: linear-gradient(135deg, #FF0000 0%, #cc0000 100%);
+      border: none;
+      color: #fff;
+    }
+
+    .btn-youtube:hover {
+      box-shadow: 0 10px 35px rgba(255, 0, 0, 0.35);
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      border: none;
+      color: #fff;
+    }
+
+    .btn-whatsapp:hover {
+      box-shadow: 0 10px 35px rgba(37, 211, 102, 0.35);
+    }
+
+    .btn-github {
+      background: linear-gradient(135deg, #333 0%, #24292e 100%);
+      border: none;
+      color: #fff;
+    }
+
+    .btn-github:hover {
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-aurora), transparent);
+      margin: 20px 0;
+      opacity: 0.3;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--accent-aurora);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .powered-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy-secondary);
+      padding: 8px 16px;
+      border-radius: 30px;
+      margin-top: 15px;
+      border: 1px solid rgba(0, 212, 255, 0.1);
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 2.2rem; }
+      .tagline { font-size: 1rem; }
+      .btn { padding: 16px 24px; font-size: 0.95rem; }
+      .aurora-logo { width: 130px; height: 130px; }
+      .theme-toggle { width: 44px; height: 44px; top: 15px; right: 15px; }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .buttons-container .btn:nth-child(1) { animation-delay: 0.1s; }
+    .buttons-container .btn:nth-child(2) { animation-delay: 0.2s; }
+    .buttons-container .btn:nth-child(3) { animation-delay: 0.3s; }
+    .buttons-container .btn:nth-child(4) { animation-delay: 0.4s; }
+    .buttons-container .btn:nth-child(5) { animation-delay: 0.5s; }
+    .buttons-container .btn:nth-child(6) { animation-delay: 0.6s; }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <i class="fas fa-moon" id="themeIcon"></i>
+  </button>
+
+  <div class="container">
+    <div class="logo-container">
+      <svg class="aurora-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="auroraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#a855f7;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+          </linearGradient>
+          <linearGradient id="innerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#0a1628;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#152238;stop-opacity:1" />
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <filter id="shadow">
+            <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#00d4ff" flood-opacity="0.3"/>
+          </filter>
+        </defs>
+        
+        <circle cx="100" cy="100" r="95" fill="url(#auroraGrad)" filter="url(#shadow)"/>
+        <circle cx="100" cy="100" r="85" fill="url(#innerGrad)"/>
+        
+        <g filter="url(#glow)">
+          <path d="M100 35 L120 75 L165 80 L132 112 L140 157 L100 135 L60 157 L68 112 L35 80 L80 75 Z" 
+                fill="none" 
+                stroke="url(#auroraGrad)" 
+                stroke-width="3"
+                stroke-linejoin="round"/>
+        </g>
+        
+        <g transform="translate(100,100)">
+          <circle r="8" fill="url(#auroraGrad)">
+            <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.6;1" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle r="20" fill="none" stroke="url(#auroraGrad)" stroke-width="1" opacity="0.5">
+            <animate attributeName="r" values="20;35;20" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.5;0;0.5" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <circle r="30" fill="none" stroke="url(#auroraGrad)" stroke-width="1" opacity="0.3">
+            <animate attributeName="r" values="30;50;30" dur="4s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.3;0;0.3" dur="4s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+        
+        <text x="100" y="178" text-anchor="middle" fill="url(#auroraGrad)" font-family="Inter, sans-serif" font-size="14" font-weight="800" letter-spacing="2">
+          AURORA
+        </text>
+      </svg>
+    </div>
+
+    <h1>AURORA MD</h1>
+    <p class="tagline">Advanced WhatsApp Session ID Generator - Secure, Fast & Reliable</p>
+
+    <div class="buttons-container">
+      <a href="/qr" class="btn btn-primary fade-in">
+        <i class="fas fa-qrcode"></i> QR CODE SESSION
+      </a>
+      
+      <a href="/pair" class="btn btn-primary fade-in">
+        <i class="fas fa-link"></i> PAIR CODE SESSION
+      </a>
+
+      <div class="divider"></div>
+
+      <a href="https://youtube.com/@jadenafrix" target="_blank" class="btn btn-youtube fade-in">
+        <i class="fab fa-youtube"></i> YOUTUBE CHANNEL
+      </a>
+      
+      <a href="https://whatsapp.com/channel/0029VbBkeEA05MUYnBMVLa37" target="_blank" class="btn btn-whatsapp fade-in">
+        <i class="fab fa-whatsapp"></i> WHATSAPP CHANNEL
+      </a>
+      
+      <a href="https://github.com/JadenAfrix1/Aurora-MD" target="_blank" class="btn btn-github fade-in">
+        <i class="fab fa-github"></i> GITHUB REPOSITORY
+      </a>
+    </div>
+
+    <footer>
+      <div>&copy; <span id="year"></span> AURORA MD</div>
+      <div class="powered-badge">
+        <i class="fas fa-bolt" style="color: var(--accent-aurora);"></i>
+        <span>Powered by <a href="https://whatsapp.com/channel/0029VbBkeEA05MUYnBMVLa37">𝐌ʀ 𝐀ғʀɪx 𝐓ᴇᴄʜ</a></span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const html = document.documentElement;
+
+    const savedTheme = localStorage.getItem('aurora-theme') || 'dark';
+    if (savedTheme === 'light') {
+      html.setAttribute('data-theme', 'light');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isLight = html.getAttribute('data-theme') === 'light';
+      if (isLight) {
+        html.removeAttribute('data-theme');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('aurora-theme', 'dark');
+      } else {
+        html.setAttribute('data-theme', 'light');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('aurora-theme', 'light');
+      }
+    });
+  </script>
+</body>
+</html>

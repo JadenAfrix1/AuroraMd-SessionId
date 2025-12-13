@@ -1,0 +1,33 @@
+{
+  "name": "aurora-md-session",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "description": "AURORA MD - Advanced WhatsApp Session ID Generator by Mr Afrix Tech",
+  "main": "index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js",
+    "build": "echo 'No build required'"
+  },
+  "keywords": [
+    "aurora-md", "whatsapp-bot", "session-generator", "pair-code", "qr-code", "mr-afrix-tech"
+  ],
+  "author": "Mr Afrix Tech",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@whiskeysockets/baileys": "^6.7.17",
+    "awesome-phonenumber": "^2.64.0",
+    "fs-extra": "^11.3.0",
+    "megajs": "^1.3.3",
+    "pino": "^8.1.0",
+    "phone": "3.1.30",
+    "body-parser": "^1.20.1",
+    "path": "^0.12.7",
+    "express": "^4.18.1",
+    "qrcode": "^1.5.3"
+  }
+}
